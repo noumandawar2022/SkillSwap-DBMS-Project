@@ -1,0 +1,1362 @@
+-- ============================================================
+-- SkillSwap - Seed Data
+-- ============================================================
+-- Note:
+-- PASSWORD_HASH values are placeholders only.
+-- Replace them with bcrypt hashes from the Python application
+-- if you want real login testing.
+
+-- ============================================================
+-- DEPARTMENTS
+-- ============================================================
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, FACULTY)
+VALUES ('Software Engineering', 'Computing');
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, FACULTY)
+VALUES ('Computer Science', 'Computing');
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, FACULTY)
+VALUES ('Electrical Engineering', 'Engineering');
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, FACULTY)
+VALUES ('Mechanical Engineering', 'Engineering');
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, FACULTY)
+VALUES ('Civil Engineering', 'Engineering');
+
+-- ============================================================
+-- SKILL CATEGORIES
+-- ============================================================
+INSERT INTO SKILL_CATEGORIES (CATEGORY_NAME, DEPARTMENT_ID)
+VALUES (
+    'Programming',
+    (SELECT DEPARTMENT_ID
+     FROM DEPARTMENTS
+     WHERE DEPARTMENT_NAME = 'Computer Science')
+);
+
+INSERT INTO SKILL_CATEGORIES (CATEGORY_NAME, DEPARTMENT_ID)
+VALUES (
+    'Design',
+    (SELECT DEPARTMENT_ID
+     FROM DEPARTMENTS
+     WHERE DEPARTMENT_NAME = 'Software Engineering')
+);
+
+INSERT INTO SKILL_CATEGORIES (CATEGORY_NAME, DEPARTMENT_ID)
+VALUES (
+    'Data Science',
+    (SELECT DEPARTMENT_ID
+     FROM DEPARTMENTS
+     WHERE DEPARTMENT_NAME = 'Computer Science')
+);
+
+INSERT INTO SKILL_CATEGORIES (CATEGORY_NAME, DEPARTMENT_ID)
+VALUES (
+    'Electronics',
+    (SELECT DEPARTMENT_ID
+     FROM DEPARTMENTS
+     WHERE DEPARTMENT_NAME = 'Electrical Engineering')
+);
+
+INSERT INTO SKILL_CATEGORIES (CATEGORY_NAME, DEPARTMENT_ID)
+VALUES (
+    'CAD and Manufacturing',
+    (SELECT DEPARTMENT_ID
+     FROM DEPARTMENTS
+     WHERE DEPARTMENT_NAME = 'Mechanical Engineering')
+);
+
+INSERT INTO SKILL_CATEGORIES (CATEGORY_NAME, DEPARTMENT_ID)
+VALUES (
+    'Communication',
+    (SELECT DEPARTMENT_ID
+     FROM DEPARTMENTS
+     WHERE DEPARTMENT_NAME = 'Civil Engineering')
+);
+
+-- ============================================================
+-- SKILLS
+-- ============================================================
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'Python',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Programming')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'Java',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Programming')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'C++',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Programming')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'SQL',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Programming')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'Figma',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Design')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'UI/UX Design',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Design')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'Machine Learning',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Data Science')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'Data Analysis',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Data Science')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'MATLAB',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Electronics')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'Arduino',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Electronics')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'AutoCAD',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'CAD and Manufacturing')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'SolidWorks',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'CAD and Manufacturing')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'Public Speaking',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Communication')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'Technical Writing',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Communication')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    'Project Planning',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Communication')
+);
+
+INSERT INTO SKILLS (SKILL_NAME, CATEGORY_ID)
+VALUES (
+    '3D Printing',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'CAD and Manufacturing')
+);
+
+-- ============================================================
+-- USERS
+-- ============================================================
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Computer Science'),
+    'Admin User',
+    2020,
+    'admin@skillswap.edu',
+    '0300-0000000',
+    'CHANGE_IN_APP',
+    'ADMIN',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Software Engineering'),
+    'Alice Johnson',
+    2023,
+    'alice@skillswap.edu',
+    '0301-1111111',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Computer Science'),
+    'Bob Smith',
+    2022,
+    'bob@skillswap.edu',
+    '0302-2222222',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Electrical Engineering'),
+    'Carol Davis',
+    2024,
+    'carol@skillswap.edu',
+    '0303-3333333',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Mechanical Engineering'),
+    'Dave Brown',
+    2023,
+    'dave@skillswap.edu',
+    '0304-4444444',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Civil Engineering'),
+    'Elena Khan',
+    2024,
+    'elena@skillswap.edu',
+    '0305-5555555',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Software Engineering'),
+    'Farhan Ali',
+    2022,
+    'farhan@skillswap.edu',
+    '0306-6666666',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Computer Science'),
+    'Hira Fatima',
+    2023,
+    'hira@skillswap.edu',
+    '0307-7777777',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Electrical Engineering'),
+    'Imran Aziz',
+    2024,
+    'imran@skillswap.edu',
+    '0308-8888888',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Mechanical Engineering'),
+    'Isha Noor',
+    2022,
+    'isha@skillswap.edu',
+    '0309-9999999',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'ACTIVE'
+);
+
+INSERT INTO USERS (DEPARTMENT_ID, NAME, BATCH, EMAIL, PHONE, PASSWORD_HASH, ROLE, STATUS)
+VALUES (
+    (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Civil Engineering'),
+    'Junaid Ahmed',
+    2021,
+    'junaid@skillswap.edu',
+    '0310-1010101',
+    'CHANGE_IN_APP',
+    'STUDENT',
+    'INACTIVE'
+);
+
+-- ============================================================
+-- SKILL SUGGESTIONS
+-- ============================================================
+INSERT INTO SKILL_SUGGESTIONS (USER_ID, SKILL_NAME, CATEGORY_ID, STATUS, REVIEWED_AT)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'alice@skillswap.edu'),
+    'React Native',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Programming'),
+    'PENDING',
+    NULL
+);
+
+INSERT INTO SKILL_SUGGESTIONS (USER_ID, SKILL_NAME, CATEGORY_ID, STATUS, REVIEWED_AT)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu'),
+    'Cloud Computing',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Data Science'),
+    'APPROVED',
+    SYSDATE
+);
+
+INSERT INTO SKILL_SUGGESTIONS (USER_ID, SKILL_NAME, CATEGORY_ID, STATUS, REVIEWED_AT)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu'),
+    '3D Printing',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'CAD and Manufacturing'),
+    'REJECTED',
+    SYSDATE
+);
+
+INSERT INTO SKILL_SUGGESTIONS (USER_ID, SKILL_NAME, CATEGORY_ID, STATUS, REVIEWED_AT)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'elena@skillswap.edu'),
+    'Leadership',
+    (SELECT CATEGORY_ID FROM SKILL_CATEGORIES WHERE CATEGORY_NAME = 'Communication'),
+    'PENDING',
+    NULL
+);
+
+-- ============================================================
+-- OFFERS
+-- ============================================================
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'alice@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Python'),
+    'BEGINNER',
+    'ONLINE'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'alice@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Figma'),
+    'INTERMEDIATE',
+    'BOTH'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'SQL'),
+    'EXPERT',
+    'ONLINE'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Machine Learning'),
+    'INTERMEDIATE',
+    'ONLINE'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'carol@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'MATLAB'),
+    'EXPERT',
+    'IN_PERSON'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'carol@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino'),
+    'BEGINNER',
+    'BOTH'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'dave@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'AutoCAD'),
+    'BEGINNER',
+    'IN_PERSON'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'dave@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'SolidWorks'),
+    'INTERMEDIATE',
+    'IN_PERSON'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'elena@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Public Speaking'),
+    'EXPERT',
+    'BOTH'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'elena@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Technical Writing'),
+    'INTERMEDIATE',
+    'ONLINE'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'farhan@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'C++'),
+    'INTERMEDIATE',
+    'ONLINE'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Data Analysis'),
+    'BEGINNER',
+    'BOTH'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'imran@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Project Planning'),
+    'EXPERT',
+    'ONLINE'
+);
+
+INSERT INTO OFFERS (USER_ID, SKILL_ID, SKILL_LEVEL, SESSION_MODE)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Java'),
+    'BEGINNER',
+    'ONLINE'
+);
+
+-- ============================================================
+-- AVAILABILITY
+-- ============================================================
+-- Alice - Python
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'alice@skillswap.edu'
+       AND S.SKILL_NAME = 'Python'),
+    'MONDAY',
+    'MORNING'
+);
+
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'alice@skillswap.edu'
+       AND S.SKILL_NAME = 'Python'),
+    'WEDNESDAY',
+    'AFTERNOON'
+);
+
+-- Alice - Figma
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'alice@skillswap.edu'
+       AND S.SKILL_NAME = 'Figma'),
+    'TUESDAY',
+    'EVENING'
+);
+
+-- Bob - SQL
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'bob@skillswap.edu'
+       AND S.SKILL_NAME = 'SQL'),
+    'TUESDAY',
+    'MORNING'
+);
+
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'bob@skillswap.edu'
+       AND S.SKILL_NAME = 'SQL'),
+    'THURSDAY',
+    'EVENING'
+);
+
+-- Bob - Machine Learning
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'bob@skillswap.edu'
+       AND S.SKILL_NAME = 'Machine Learning'),
+    'FRIDAY',
+    'AFTERNOON'
+);
+
+-- Carol - MATLAB
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'MATLAB'),
+    'MONDAY',
+    'EVENING'
+);
+
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'MATLAB'),
+    'FRIDAY',
+    'MORNING'
+);
+
+-- Carol - Arduino
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'Arduino'),
+    'SATURDAY',
+    'MORNING'
+);
+
+-- Dave - AutoCAD
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'dave@skillswap.edu'
+       AND S.SKILL_NAME = 'AutoCAD'),
+    'WEDNESDAY',
+    'MORNING'
+);
+
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'dave@skillswap.edu'
+       AND S.SKILL_NAME = 'AutoCAD'),
+    'THURSDAY',
+    'AFTERNOON'
+);
+
+-- Dave - SolidWorks
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'dave@skillswap.edu'
+       AND S.SKILL_NAME = 'SolidWorks'),
+    'FRIDAY',
+    'EVENING'
+);
+
+-- Elena - Public Speaking
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'elena@skillswap.edu'
+       AND S.SKILL_NAME = 'Public Speaking'),
+    'THURSDAY',
+    'AFTERNOON'
+);
+
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'elena@skillswap.edu'
+       AND S.SKILL_NAME = 'Public Speaking'),
+    'SATURDAY',
+    'AFTERNOON'
+);
+
+-- Elena - Technical Writing
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'elena@skillswap.edu'
+       AND S.SKILL_NAME = 'Technical Writing'),
+    'MONDAY',
+    'MORNING'
+);
+
+-- Farhan - C++
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'farhan@skillswap.edu'
+       AND S.SKILL_NAME = 'C++'),
+    'TUESDAY',
+    'EVENING'
+);
+
+-- Hira - Data Analysis
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'hira@skillswap.edu'
+       AND S.SKILL_NAME = 'Data Analysis'),
+    'MONDAY',
+    'AFTERNOON'
+);
+
+-- Imran - Project Planning
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'imran@skillswap.edu'
+       AND S.SKILL_NAME = 'Project Planning'),
+    'WEDNESDAY',
+    'EVENING'
+);
+
+-- Isha - Java
+INSERT INTO AVAILABILITY (OFFER_ID, DAY_OF_WEEK, TIME_SLOT)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'isha@skillswap.edu'
+       AND S.SKILL_NAME = 'Java'),
+    'SATURDAY',
+    'EVENING'
+);
+
+-- ============================================================
+-- REQUESTS (initially pending)
+-- ============================================================
+-- Bob requests Alice's Python
+INSERT INTO REQUESTS (
+    USER_ID,
+    SKILL_ID,
+    OFFER_ID,
+    SELECTED_AVAILABILITY_ID,
+    URGENCY,
+    NOTE,
+    STATUS
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Python'),
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'alice@skillswap.edu'
+       AND S.SKILL_NAME = 'Python'),
+    (SELECT A.AVAILABILITY_ID
+     FROM AVAILABILITY A
+     JOIN OFFERS O ON A.OFFER_ID = O.OFFER_ID
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'alice@skillswap.edu'
+       AND S.SKILL_NAME = 'Python'
+       AND A.DAY_OF_WEEK = 'MONDAY'
+       AND A.TIME_SLOT = 'MORNING'),
+    'MEDIUM',
+    'Need help preparing for my programming assignment.',
+    'PENDING'
+);
+
+-- Hira requests Alice's Figma
+INSERT INTO REQUESTS (
+    USER_ID,
+    SKILL_ID,
+    OFFER_ID,
+    SELECTED_AVAILABILITY_ID,
+    URGENCY,
+    NOTE,
+    STATUS
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Figma'),
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'alice@skillswap.edu'
+       AND S.SKILL_NAME = 'Figma'),
+    (SELECT A.AVAILABILITY_ID
+     FROM AVAILABILITY A
+     JOIN OFFERS O ON A.OFFER_ID = O.OFFER_ID
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'alice@skillswap.edu'
+       AND S.SKILL_NAME = 'Figma'
+       AND A.DAY_OF_WEEK = 'TUESDAY'
+       AND A.TIME_SLOT = 'EVENING'),
+    'HIGH',
+    'Need quick UI help for a class project.',
+    'PENDING'
+);
+
+-- Dave requests Bob's SQL
+INSERT INTO REQUESTS (
+    USER_ID,
+    SKILL_ID,
+    OFFER_ID,
+    SELECTED_AVAILABILITY_ID,
+    URGENCY,
+    NOTE,
+    STATUS
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'dave@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'SQL'),
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'bob@skillswap.edu'
+       AND S.SKILL_NAME = 'SQL'),
+    (SELECT A.AVAILABILITY_ID
+     FROM AVAILABILITY A
+     JOIN OFFERS O ON A.OFFER_ID = O.OFFER_ID
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'bob@skillswap.edu'
+       AND S.SKILL_NAME = 'SQL'
+       AND A.DAY_OF_WEEK = 'TUESDAY'
+       AND A.TIME_SLOT = 'MORNING'),
+    'LOW',
+    'Just want a short revision session.',
+    'PENDING'
+);
+
+-- Isha requests Carol's Arduino
+INSERT INTO REQUESTS (
+    USER_ID,
+    SKILL_ID,
+    OFFER_ID,
+    SELECTED_AVAILABILITY_ID,
+    URGENCY,
+    NOTE,
+    STATUS
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino'),
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'Arduino'),
+    (SELECT A.AVAILABILITY_ID
+     FROM AVAILABILITY A
+     JOIN OFFERS O ON A.OFFER_ID = O.OFFER_ID
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'Arduino'
+       AND A.DAY_OF_WEEK = 'SATURDAY'
+       AND A.TIME_SLOT = 'MORNING'),
+    'MEDIUM',
+    'Need help with a small embedded systems task.',
+    'PENDING'
+);
+
+-- Pending requests
+INSERT INTO REQUESTS (
+    USER_ID,
+    SKILL_ID,
+    OFFER_ID,
+    SELECTED_AVAILABILITY_ID,
+    URGENCY,
+    NOTE,
+    STATUS
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'carol@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Machine Learning'),
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'bob@skillswap.edu'
+       AND S.SKILL_NAME = 'Machine Learning'),
+    (SELECT A.AVAILABILITY_ID
+     FROM AVAILABILITY A
+     JOIN OFFERS O ON A.OFFER_ID = O.OFFER_ID
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'bob@skillswap.edu'
+       AND S.SKILL_NAME = 'Machine Learning'
+       AND A.DAY_OF_WEEK = 'FRIDAY'
+       AND A.TIME_SLOT = 'AFTERNOON'),
+    'HIGH',
+    'Need ML basics for semester project.',
+    'PENDING'
+);
+
+INSERT INTO REQUESTS (
+    USER_ID,
+    SKILL_ID,
+    OFFER_ID,
+    SELECTED_AVAILABILITY_ID,
+    URGENCY,
+    NOTE,
+    STATUS
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'elena@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'AutoCAD'),
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'dave@skillswap.edu'
+       AND S.SKILL_NAME = 'AutoCAD'),
+    (SELECT A.AVAILABILITY_ID
+     FROM AVAILABILITY A
+     JOIN OFFERS O ON A.OFFER_ID = O.OFFER_ID
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'dave@skillswap.edu'
+       AND S.SKILL_NAME = 'AutoCAD'
+       AND A.DAY_OF_WEEK = 'WEDNESDAY'
+       AND A.TIME_SLOT = 'MORNING'),
+    'HIGH',
+    'Need help preparing drawings.',
+    'PENDING'
+);
+
+INSERT INTO REQUESTS (
+    USER_ID,
+    SKILL_ID,
+    OFFER_ID,
+    SELECTED_AVAILABILITY_ID,
+    URGENCY,
+    NOTE,
+    STATUS
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'farhan@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Public Speaking'),
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'elena@skillswap.edu'
+       AND S.SKILL_NAME = 'Public Speaking'),
+    (SELECT A.AVAILABILITY_ID
+     FROM AVAILABILITY A
+     JOIN OFFERS O ON A.OFFER_ID = O.OFFER_ID
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'elena@skillswap.edu'
+       AND S.SKILL_NAME = 'Public Speaking'
+       AND A.DAY_OF_WEEK = 'THURSDAY'
+       AND A.TIME_SLOT = 'AFTERNOON'),
+    'LOW',
+    'Need practice for a presentation.',
+    'PENDING'
+);
+
+INSERT INTO REQUESTS (
+    USER_ID,
+    SKILL_ID,
+    OFFER_ID,
+    SELECTED_AVAILABILITY_ID,
+    URGENCY,
+    NOTE,
+    STATUS
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'imran@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'MATLAB'),
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'MATLAB'),
+    (SELECT A.AVAILABILITY_ID
+     FROM AVAILABILITY A
+     JOIN OFFERS O ON A.OFFER_ID = O.OFFER_ID
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'MATLAB'
+       AND A.DAY_OF_WEEK = 'MONDAY'
+       AND A.TIME_SLOT = 'EVENING'),
+    'MEDIUM',
+    'Need MATLAB help for circuits lab.',
+    'PENDING'
+);
+
+INSERT INTO REQUESTS (
+    USER_ID,
+    SKILL_ID,
+    OFFER_ID,
+    SELECTED_AVAILABILITY_ID,
+    URGENCY,
+    NOTE,
+    STATUS
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'alice@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino'),
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'Arduino'),
+    (SELECT A.AVAILABILITY_ID
+     FROM AVAILABILITY A
+     JOIN OFFERS O ON A.OFFER_ID = O.OFFER_ID
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'Arduino'
+       AND A.DAY_OF_WEEK = 'SATURDAY'
+       AND A.TIME_SLOT = 'MORNING'),
+    'MEDIUM',
+    'Need Arduino help for a small prototype.',
+    'PENDING'
+);
+
+-- ============================================================
+-- ACCEPT SOME REQUESTS (fires MATCH notifications)
+-- ============================================================
+UPDATE REQUESTS
+SET STATUS = 'ACCEPTED'
+WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu')
+  AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Python');
+
+UPDATE REQUESTS
+SET STATUS = 'ACCEPTED'
+WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu')
+  AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Figma');
+
+UPDATE REQUESTS
+SET STATUS = 'ACCEPTED'
+WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'dave@skillswap.edu')
+  AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'SQL');
+
+UPDATE REQUESTS
+SET STATUS = 'ACCEPTED'
+WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu')
+  AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino');
+
+-- ============================================================
+-- SESSIONS
+-- ============================================================
+-- Bob <-> Alice (completed)
+INSERT INTO SESSIONS (
+    OFFER_ID,
+    REQUEST_ID,
+    SESSION_DATE,
+    MEETING_DETAIL,
+    STATUS,
+    REQUESTER_CONFIRMED,
+    OFFERER_CONFIRMED
+)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'alice@skillswap.edu'
+       AND S.SKILL_NAME = 'Python'),
+    (SELECT REQUEST_ID
+     FROM REQUESTS
+     WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu')
+       AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Python')),
+    SYSDATE - 2,
+    'Zoom',
+    'SCHEDULED',
+    1,
+    1
+);
+
+-- Hira <-> Alice (completed)
+INSERT INTO SESSIONS (
+    OFFER_ID,
+    REQUEST_ID,
+    SESSION_DATE,
+    MEETING_DETAIL,
+    STATUS,
+    REQUESTER_CONFIRMED,
+    OFFERER_CONFIRMED
+)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'alice@skillswap.edu'
+       AND S.SKILL_NAME = 'Figma'),
+    (SELECT REQUEST_ID
+     FROM REQUESTS
+     WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu')
+       AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Figma')),
+    SYSDATE - 1,
+    'Zoom',
+    'SCHEDULED',
+    1,
+    1
+);
+
+-- Dave <-> Bob (scheduled, not completed yet)
+INSERT INTO SESSIONS (
+    OFFER_ID,
+    REQUEST_ID,
+    SESSION_DATE,
+    MEETING_DETAIL,
+    STATUS,
+    REQUESTER_CONFIRMED,
+    OFFERER_CONFIRMED
+)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'bob@skillswap.edu'
+       AND S.SKILL_NAME = 'SQL'),
+    (SELECT REQUEST_ID
+     FROM REQUESTS
+     WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'dave@skillswap.edu')
+       AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'SQL')),
+    SYSDATE + 1,
+    'Google Meet',
+    'SCHEDULED',
+    1,
+    0
+);
+
+-- Isha <-> Carol (completed)
+INSERT INTO SESSIONS (
+    OFFER_ID,
+    REQUEST_ID,
+    SESSION_DATE,
+    MEETING_DETAIL,
+    STATUS,
+    REQUESTER_CONFIRMED,
+    OFFERER_CONFIRMED
+)
+VALUES (
+    (SELECT O.OFFER_ID
+     FROM OFFERS O
+     JOIN USERS U ON O.USER_ID = U.USER_ID
+     JOIN SKILLS S ON O.SKILL_ID = S.SKILL_ID
+     WHERE U.EMAIL = 'carol@skillswap.edu'
+       AND S.SKILL_NAME = 'Arduino'),
+    (SELECT REQUEST_ID
+     FROM REQUESTS
+     WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu')
+       AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino')),
+    SYSDATE - 1,
+    'Lab 4',
+    'SCHEDULED',
+    1,
+    1
+);
+
+-- ============================================================
+-- FEEDBACK (allowed only for completed sessions)
+-- ============================================================
+INSERT INTO FEEDBACK (SESSION_ID, SCORE, FEEDBACK_TEXT)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Python')
+     )),
+    5,
+    'Very clear explanations and great pacing.'
+);
+
+INSERT INTO FEEDBACK (SESSION_ID, SCORE, FEEDBACK_TEXT)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Figma')
+     )),
+    4,
+    'Helped me understand the UI workflow well.'
+);
+
+INSERT INTO FEEDBACK (SESSION_ID, SCORE, FEEDBACK_TEXT)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino')
+     )),
+    5,
+    'Explained the Arduino wiring and code very clearly.'
+);
+
+-- ============================================================
+-- ENDORSEMENTS
+-- ============================================================
+INSERT INTO ENDORSEMENTS (
+    ENDORSED_USER_ID,
+    ENDORSED_BY_ID,
+    SKILL_ID,
+    NOTE
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'alice@skillswap.edu'),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Python'),
+    'Great at explaining Python basics.'
+);
+
+INSERT INTO ENDORSEMENTS (
+    ENDORSED_USER_ID,
+    ENDORSED_BY_ID,
+    SKILL_ID,
+    NOTE
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'alice@skillswap.edu'),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Figma'),
+    'Very helpful for UI design tasks.'
+);
+
+INSERT INTO ENDORSEMENTS (
+    ENDORSED_USER_ID,
+    ENDORSED_BY_ID,
+    SKILL_ID,
+    NOTE
+)
+VALUES (
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'carol@skillswap.edu'),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu'),
+    (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino'),
+    'Strong practical understanding of Arduino setups.'
+);
+
+-- ============================================================
+-- MESSAGES
+-- ============================================================
+-- Bob <-> Alice (completed session)
+INSERT INTO MESSAGES (SESSION_ID, SENDER_ID, CONTENT, IS_READ)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Python')
+     )),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu'),
+    'Thanks for the Python session. It was really helpful.',
+    0
+);
+
+INSERT INTO MESSAGES (SESSION_ID, SENDER_ID, CONTENT, IS_READ)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Python')
+     )),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'alice@skillswap.edu'),
+    'Glad it helped. Keep practicing the examples.',
+    0
+);
+
+-- Hira <-> Alice (completed session)
+INSERT INTO MESSAGES (SESSION_ID, SENDER_ID, CONTENT, IS_READ)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Figma')
+     )),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu'),
+    'Your Figma tips saved me a lot of time.',
+    0
+);
+
+INSERT INTO MESSAGES (SESSION_ID, SENDER_ID, CONTENT, IS_READ)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Figma')
+     )),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'alice@skillswap.edu'),
+    'Any time. Good luck with your project.',
+    0
+);
+
+-- Dave <-> Bob (scheduled session)
+INSERT INTO MESSAGES (SESSION_ID, SENDER_ID, CONTENT, IS_READ)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'dave@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'SQL')
+     )),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'dave@skillswap.edu'),
+    'Looking forward to the SQL session tomorrow.',
+    0
+);
+
+-- Isha <-> Carol (completed session)
+INSERT INTO MESSAGES (SESSION_ID, SENDER_ID, CONTENT, IS_READ)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino')
+     )),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu'),
+    'Thanks, the wiring part is much clearer now.',
+    0
+);
+
+INSERT INTO MESSAGES (SESSION_ID, SENDER_ID, CONTENT, IS_READ)
+VALUES (
+    (SELECT SESSION_ID
+     FROM SESSIONS
+     WHERE REQUEST_ID = (
+         SELECT REQUEST_ID
+         FROM REQUESTS
+         WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu')
+           AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino')
+     )),
+    (SELECT USER_ID FROM USERS WHERE EMAIL = 'carol@skillswap.edu'),
+    'Happy to help. Keep building projects.',
+    0
+);
+
+-- ============================================================
+-- COMPLETED REQUEST UPDATES
+-- ============================================================
+UPDATE REQUESTS
+SET STATUS = 'COMPLETED'
+WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'bob@skillswap.edu')
+  AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Python');
+
+UPDATE REQUESTS
+SET STATUS = 'COMPLETED'
+WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'hira@skillswap.edu')
+  AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Figma');
+
+UPDATE REQUESTS
+SET STATUS = 'COMPLETED'
+WHERE USER_ID = (SELECT USER_ID FROM USERS WHERE EMAIL = 'isha@skillswap.edu')
+  AND SKILL_ID = (SELECT SKILL_ID FROM SKILLS WHERE SKILL_NAME = 'Arduino');
+
+COMMIT;
