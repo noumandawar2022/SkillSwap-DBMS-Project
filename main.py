@@ -4,6 +4,9 @@ import customtkinter as ctk
 
 from screens.dashboard_page import DashboardPage
 from screens.login_page import LoginPage
+from screens.offers_page import OffersPage
+from screens.profile_page import ProfilePage
+from screens.skills_page import SkillsPage
 
 
 class SkillSwapApp(ctk.CTk):
@@ -45,17 +48,48 @@ class SkillSwapApp(ctk.CTk):
         self.show_dashboard()
 
     def show_dashboard(self) -> None:
+        self.show_authenticated_page("dashboard")
+
+    def show_profile(self) -> None:
+        self.show_authenticated_page("profile")
+
+    def show_skills(self) -> None:
+        self.show_authenticated_page("skills")
+
+    def show_offers(self) -> None:
+        self.show_authenticated_page("offers")
+
+    def show_authenticated_page(self, page_key: str) -> None:
         if self.current_user is None:
             self.show_login()
             return
 
-        self._mount_page(
-            DashboardPage(
-                self,
-                user=self.current_user,
-                on_logout=self.handle_logout,
-            )
-        )
+        page_classes = {
+            "dashboard": DashboardPage,
+            "profile": ProfilePage,
+            "skills": SkillsPage,
+            "offers": OffersPage,
+        }
+        page_class = page_classes.get(page_key, DashboardPage)
+
+        page_kwargs = {
+            "user": self.current_user,
+            "on_navigate": self.handle_navigation,
+            "on_logout": self.handle_logout,
+        }
+        if page_key == "profile":
+            page_kwargs["on_user_updated"] = self.handle_user_updated
+
+        self._mount_page(page_class(self, **page_kwargs))
+
+    def handle_navigation(self, page_key: str) -> None:
+        self.show_authenticated_page(page_key)
+
+    def handle_user_updated(self, user: dict) -> None:
+        if self.current_user is None:
+            self.current_user = user
+        else:
+            self.current_user.update(user)
 
     def handle_logout(self) -> None:
         self.show_login()

@@ -5,6 +5,14 @@ from collections.abc import Callable, Sequence
 import customtkinter as ctk
 
 
+DEFAULT_NAV_ITEMS: tuple[tuple[str, str], ...] = (
+    ("dashboard", "Dashboard"),
+    ("profile", "Profile"),
+    ("skills", "Skills"),
+    ("offers", "Offers"),
+)
+
+
 class Sidebar(ctk.CTkFrame):
     """Reusable left navigation for authenticated screens."""
 
@@ -12,16 +20,16 @@ class Sidebar(ctk.CTkFrame):
         self,
         master,
         user: dict,
-        items: Sequence[tuple[str, str]],
         active_key: str,
         on_select: Callable[[str], None],
         on_logout: Callable[[], None],
+        items: Sequence[tuple[str, str]] | None = None,
     ) -> None:
         super().__init__(master, width=252, fg_color="#111827", corner_radius=0)
         self.grid_propagate(False)
 
         self.user = user
-        self.items = items
+        self.items = tuple(items or DEFAULT_NAV_ITEMS)
         self.active_key = active_key
         self.on_select = on_select
         self.on_logout = on_logout

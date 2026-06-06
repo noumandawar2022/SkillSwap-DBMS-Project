@@ -146,10 +146,12 @@ class DashboardPage(ctk.CTkFrame):
         self,
         master: ctk.CTk,
         user: dict,
+        on_navigate: Callable[[str], None],
         on_logout: Callable[[], None],
     ) -> None:
         super().__init__(master, fg_color="#0b1018")
         self.user = user
+        self.on_navigate = on_navigate
         self.repository = DashboardRepository()
         self.metric_value_labels: dict[str, ctk.CTkLabel] = {}
         self.list_bodies: dict[str, ctk.CTkFrame] = {}
@@ -165,9 +167,8 @@ class DashboardPage(ctk.CTkFrame):
         sidebar = Sidebar(
             self,
             user=self.user,
-            items=(("dashboard", "Dashboard"),),
             active_key="dashboard",
-            on_select=self._handle_navigation,
+            on_select=self.on_navigate,
             on_logout=on_logout,
         )
         sidebar.grid(row=0, column=0, sticky="nsew")
@@ -199,8 +200,8 @@ class DashboardPage(ctk.CTkFrame):
         ).grid(row=0, column=0, sticky="w")
 
         detail = (
-            f"{self.user.get('role', '').title()} · "
-            f"{self.user.get('department_name', 'Department')} · "
+            f"{self.user.get('role', '').title()} | "
+            f"{self.user.get('department_name', 'Department')} | "
             f"Batch {self.user.get('batch', '')}"
         )
         ctk.CTkLabel(
@@ -405,10 +406,6 @@ class DashboardPage(ctk.CTkFrame):
     def _show_error(self, message: str) -> None:
         self.error_var.set(message)
         self.error_banner.grid()
-
-    def _handle_navigation(self, key: str) -> None:
-        if key == "dashboard":
-            self.refresh()
 
     @staticmethod
     def _format_number(value: int) -> str:
