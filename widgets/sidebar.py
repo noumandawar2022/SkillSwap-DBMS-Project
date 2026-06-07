@@ -10,6 +10,11 @@ DEFAULT_NAV_ITEMS: tuple[tuple[str, str], ...] = (
     ("profile", "Profile"),
     ("skills", "Skills"),
     ("offers", "Offers"),
+    ("requests", "Requests"),
+    ("notifications", "Notifications"),
+    ("sessions", "Sessions"),
+    ("messages", "Messages"),
+    ("feedback", "Feedback"),
 )
 
 

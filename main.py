@@ -3,9 +3,14 @@ from __future__ import annotations
 import customtkinter as ctk
 
 from screens.dashboard_page import DashboardPage
+from screens.feedback_page import FeedbackPage
 from screens.login_page import LoginPage
+from screens.messages_page import MessagesPage
+from screens.notifications_page import NotificationsPage
 from screens.offers_page import OffersPage
 from screens.profile_page import ProfilePage
+from screens.requests_page import RequestsPage
+from screens.sessions_page import SessionsPage
 from screens.skills_page import SkillsPage
 
 
@@ -59,6 +64,21 @@ class SkillSwapApp(ctk.CTk):
     def show_offers(self) -> None:
         self.show_authenticated_page("offers")
 
+    def show_requests(self) -> None:
+        self.show_authenticated_page("requests")
+
+    def show_notifications(self) -> None:
+        self.show_authenticated_page("notifications")
+
+    def show_sessions(self) -> None:
+        self.show_authenticated_page("sessions")
+
+    def show_messages(self) -> None:
+        self.show_authenticated_page("messages")
+
+    def show_feedback(self) -> None:
+        self.show_authenticated_page("feedback")
+
     def show_authenticated_page(self, page_key: str) -> None:
         if self.current_user is None:
             self.show_login()
@@ -69,6 +89,11 @@ class SkillSwapApp(ctk.CTk):
             "profile": ProfilePage,
             "skills": SkillsPage,
             "offers": OffersPage,
+            "requests": RequestsPage,
+            "notifications": NotificationsPage,
+            "sessions": SessionsPage,
+            "messages": MessagesPage,
+            "feedback": FeedbackPage,
         }
         page_class = page_classes.get(page_key, DashboardPage)
 
